@@ -17,8 +17,45 @@ app.get("/", function (request, response) {
 });
 
 //START OF YOUR CODE...
+app.get("/quotes", function (request, response) {
+  response.send(quotes);
+});
 
-//...END OF YOUR CODE
+app.get("/quotes/random", function (request, response) {
+  response.send(pickFromArray(quotes));
+});
+
+app.get("/quotes/search", function (req, response){
+  const term=req.query.term;
+  console.log(term);
+
+  //gettig the quotes that contain the word
+let answer=quotes.filter(function(quote){
+  return quote.quote.includes(term);
+})
+  //return the response object, new set of quotes
+  response.send(answer)
+})
+
+app.get("/quotes2/search", function (req, response){
+  const term=req.query.term;
+  console.log(term);
+  const result=quotes.filter(function(quote){
+  return quote.quote.includes(term);
+})
+  response.send(result);
+} )
+
+app.get("/quotes3/search", function (req, response){
+  const term=req.query.term;
+  console.log(term);
+  const result=quotes.filter(function(quote){
+    return quote.quote.includes("term");
+  })
+  response.send(result);
+} )
+
+//...END OF YOUR CODE 
 
 //You can use this function to pick one element at random from a given array
 //example: pickFromArray([1,2,3,4]), or
